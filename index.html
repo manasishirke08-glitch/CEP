@@ -1,0 +1,302 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MoneySmart Rural</title>
+<style>
+:root{--bg:#f1f6f1;--cd:#fff;--tx:#17261e;--mu:#586b5f;--pr:#1b5e3f;--ac:#f0b429;--bd:#d3dfd5;--bad:#b3261e;--ok:#1b7a4a;--soft:#e2efe5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0f1713;--cd:#17231c;--tx:#e8f1ea;--mu:#9bb0a2;--pr:#58c08a;--bd:#2a3b30;--soft:#1e2f25;--bad:#ff8a80;--ok:#6fd49b}}
+:root[data-theme=dark]{--bg:#0f1713;--cd:#17231c;--tx:#e8f1ea;--mu:#9bb0a2;--pr:#58c08a;--bd:#2a3b30;--soft:#1e2f25;--bad:#ff8a80;--ok:#6fd49b}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Segoe UI",system-ui,"Noto Sans Devanagari",sans-serif}
+header{padding:14px 16px 6px;max-width:1000px;margin:auto;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between}
+.logo{font-weight:800;font-size:22px;color:var(--pr)}.logo i{font-style:normal;color:var(--ac)}
+nav{max-width:1000px;margin:auto;padding:4px 12px;display:flex;flex-wrap:wrap;gap:6px}
+nav button{background:var(--cd);border:1px solid var(--bd);color:var(--tx);border-radius:20px;padding:6px 12px;cursor:pointer;font:inherit;font-size:14px}
+nav button.on{background:var(--pr);color:#fff;border-color:var(--pr)}
+main{max-width:1000px;margin:auto;padding:12px 16px 40px}
+h1{font-size:clamp(28px,6vw,46px);line-height:1.15;margin:.3em 0}h2{margin:.2em 0 .6em;font-size:26px}h3{margin:.6em 0 .3em}
+.hero{background:var(--pr);color:#fff;border-radius:18px;padding:28px 22px}.hero p{max-width:60ch;opacity:.95}
+.hero .btn{background:var(--ac);color:#241a00}.hero .btn.alt{background:#ffffff22;color:#fff;border:1px solid #fff6}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.card{background:var(--cd);border:1px solid var(--bd);border-radius:12px;padding:16px}
+.card.k{border-left:6px solid var(--ac)}
+.btn{background:var(--pr);color:#fff;border:0;border-radius:10px;padding:10px 16px;font:inherit;font-weight:600;cursor:pointer;margin:4px 6px 4px 0;text-decoration:none;display:inline-block}
+.btn.alt{background:var(--soft);color:var(--tx)}
+.mu{color:var(--mu);font-size:14px}
+label{display:block;font-size:14px;margin:8px 0 2px;color:var(--mu)}
+input,select,textarea{width:100%;padding:9px;border-radius:8px;border:1px solid var(--bd);background:var(--bg);color:var(--tx);font:inherit}
+.row{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.out{background:var(--soft);border-radius:10px;padding:12px;margin-top:10px}.out b{font-size:20px;color:var(--pr)}
+.opt{display:block;width:100%;text-align:left;background:var(--bg);color:var(--tx);border:1px solid var(--bd);border-radius:10px;padding:10px;margin:6px 0;font:inherit;cursor:pointer}
+.opt.good{border-color:var(--ok);background:var(--soft)}.opt.bad{border-color:var(--bad)}
+.fb{font-weight:600;min-height:1.4em}.good-t{color:var(--ok)}.bad-t{color:var(--bad)}
+.bar{height:10px;background:var(--bd);border-radius:6px;overflow:hidden}.bar div{height:100%;background:var(--ac);width:0;transition:width .3s}
+.donut{width:150px;height:150px;border-radius:50%;margin:8px auto;position:relative}.donut:after{content:"";position:absolute;inset:32px;background:var(--cd);border-radius:50%}
+.lg span{display:inline-block;margin:2px 10px 2px 0;font-size:13px}.lg i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:4px}
+#modal{position:fixed;inset:0;background:#000a;display:flex;align-items:center;justify-content:center;padding:12px;z-index:9}#modal[hidden]{display:none}
+#modal .card{max-width:560px;width:100%;max-height:90vh;overflow:auto}
+.warn{border-left:6px solid var(--bad)}.sms{background:var(--soft);border-radius:10px;padding:12px;font-style:italic}
+details{background:var(--cd);border:1px solid var(--bd);border-radius:10px;padding:10px 14px;margin:8px 0}summary{cursor:pointer;font-weight:600}
+a{color:var(--pr)}footer{text-align:center;color:var(--mu);font-size:13px;padding:20px}
+:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.intro{position:fixed;inset:0;z-index:20;background:radial-gradient(circle at 50% 30%,#1f6b49,#0e2a1e 70%);color:#fff;overflow:auto;display:flex;align-items:center;justify-content:center;padding:calc(20px + env(safe-area-inset-top,0px)) 20px calc(20px + env(safe-area-inset-bottom,0px));text-align:center}.intro[hidden]{display:none}
+.intro .in{max-width:640px}.intro h1{font-size:clamp(28px,6vw,48px);margin:.2em 0}.intro p{opacity:.92;margin:.5em auto;max-width:52ch}
+.chips span{display:inline-block;border:1px solid #fff5;border-radius:20px;padding:4px 12px;margin:3px;font-size:14px}
+.intro .btn{background:#f0b429;color:#241a00;font-size:17px;padding:12px 22px}.intro .btn.alt{background:#ffffff1f;color:#fff;border:1px solid #fff6}
+.intro svg{width:min(260px,60vw);height:auto}.st{stroke-dasharray:150;stroke-dashoffset:150;animation:gr 2s .3s ease-out forwards}.lf,.cn{transform-box:fill-box;transform-origin:center;transform:scale(0);animation:pop .6s forwards}
+@keyframes gr{to{stroke-dashoffset:0}}@keyframes pop{to{transform:scale(1)}}
+@media(prefers-reduced-motion:reduce){.st,.lf,.cn{animation:none;stroke-dashoffset:0;transform:none}}
+.cert{border:4px double var(--ac);background:var(--cd);border-radius:14px;padding:28px;text-align:center}.cert h2{font-size:34px;color:var(--pr);margin:.2em 0}
+.tourbar{position:fixed;left:8px;right:8px;bottom:calc(8px + env(safe-area-inset-bottom,0px));background:#0e2a1e;color:#fff;border-radius:12px;padding:10px 14px;z-index:15;box-shadow:0 4px 20px #0006}
+</style></head><body>
+<div class="intro" id="intro"><div class="in">
+<svg viewBox="0 0 260 200" aria-hidden="true"><path d="M40 190H220" stroke="#8bd3a8" stroke-width="4" stroke-linecap="round"/><path class="st" d="M130 190C130 150 126 115 130 66" fill="none" stroke="#8bd3a8" stroke-width="6" stroke-linecap="round"/><ellipse class="lf" style="animation-delay:1s" cx="104" cy="140" rx="24" ry="10" fill="#58c08a" transform="rotate(-25 104 140)"/><ellipse class="lf" style="animation-delay:1.3s" cx="157" cy="118" rx="24" ry="10" fill="#58c08a"/><g class="cn" style="animation-delay:1.7s"><circle cx="90" cy="98" r="17" fill="#f0b429"/><text x="90" y="104" text-anchor="middle" font-size="17" font-weight="700" fill="#241a00">₹</text></g><g class="cn" style="animation-delay:2s"><circle cx="172" cy="80" r="17" fill="#f0b429"/><text x="172" y="86" text-anchor="middle" font-size="17" font-weight="700" fill="#241a00">₹</text></g><g class="cn" style="animation-delay:2.3s"><circle cx="130" cy="48" r="20" fill="#f0b429"/><text x="130" y="55" text-anchor="middle" font-size="20" font-weight="700" fill="#241a00">₹</text></g></svg>
+<p>A university project by Mansi</p>
+<h1>Financial Literacy Awareness System for Rural Areas</h1>
+<p><b>The problem:</b> many villagers lose money to online fraud, high-interest debt and confusing banking.</p>
+<p><b>The solution:</b> MoneySmart Rural teaches people to save, budget, borrow, bank and pay safely through lessons, calculators, quizzes and scam simulations, in English and Marathi.</p>
+<div class="chips"><span>6 learning modules</span><span>3 live calculators</span><span>Scam-spotting activity</span><span>10-question quiz</span><span>Govt. schemes</span></div>
+<p style="margin-top:14px"><button class="btn" id="enter">Enter MoneySmart Rural</button><button class="btn alt" id="scam">Try the scam test first</button><button class="btn alt" id="tour2">Take the demo tour</button></p>
+<p class="mu" style="color:#fffb">Built with HTML, CSS and JavaScript</p></div></div>
+<header><div class="logo">Money<i>Smart</i> Rural</div>
+<div><button class="btn alt" id="acc">👤 Login</button><button class="btn alt" id="tour">▶ Demo tour</button><button class="btn alt" id="lang">मराठी</button><button class="btn alt" id="tts">🔊 Read aloud</button></div></header>
+<nav id="nav"></nav>
+<main>
+
+<section id="home">
+<div class="hero"><h1 data-mr="ग्रामीण समुदायांना आर्थिक साक्षरतेद्वारे सक्षम करणे">Empowering Rural Communities Through Financial Literacy</h1>
+<p data-mr="बचत करायला, बजेट सांभाळायला, डिजिटल बँकिंग सुरक्षितपणे वापरायला आणि योग्य आर्थिक निर्णय घ्यायला शिका.">Learn to save money, manage your budget, use digital banking safely, and make smarter financial decisions.</p>
+<button class="btn" data-go="learn" data-mr="📚 शिकायला सुरुवात करा">📚 Start Learning</button>
+<button class="btn alt" data-go="calc" data-mr="🧮 बचत मोजा">🧮 Calculate Your Savings</button>
+<button class="btn alt" data-go="quiz" data-mr="📝 क्विझ सोडवा">📝 Take a Financial Quiz</button>
+<button class="btn alt" data-go="safety" data-mr="🛡️ ऑनलाइन सुरक्षा शिका">🛡️ Learn Online Safety</button></div>
+<div class="card k" style="margin:14px 0"><h3>Project at a glance</h3><p><b>Title:</b> Financial Literacy Awareness System for Rural Areas<br><b>Objective:</b> make money education simple, interactive and accessible for rural communities.<br><b>Try these in 2 minutes:</b> Calculators (change the loan amount), Online Safety (click “Is This Safe?”), Quiz (get a score).<br><b>Technology:</b> HTML, CSS, JavaScript. No bank details are ever collected.</p></div>
+<h2 data-mr="आर्थिक साक्षरता म्हणजे काय?">What is financial literacy?</h2>
+<p data-mr="पैशांचे व्यवस्थापन, बचत, कर्ज, बँकिंग आणि आर्थिक निर्णय समजून घेण्याची क्षमता म्हणजे आर्थिक साक्षरता. ग्रामीण भागात बँकिंग आणि ऑनलाइन फसवणुकीबद्दलची जागरूकता कुटुंबाचे कष्टाचे पैसे वाचवते.">Financial literacy is the ability to understand and manage money: saving, budgeting, borrowing, banking and making decisions. In rural areas, this knowledge protects hard-earned income from debt traps and fraud, and helps families use banks, schemes and digital payments with confidence.</p>
+<div class="grid">
+<div class="card k" data-go="learn"><h3>💰 Savings</h3><p class="mu">Learn why and how to save, then test it in the calculator.</p></div>
+<div class="card k" data-go="bank"><h3>🏦 Banking</h3><p class="mu">Accounts, passbooks, ATMs, nominees and how to open an account.</p></div>
+<div class="card k" data-go="schemes"><h3>🏛️ Government Schemes</h3><p class="mu">Jan Dhan, insurance, pension and Mudra loans explained.</p></div>
+<div class="card k" data-go="safety"><h3>🛡️ Digital Safety</h3><p class="mu">Spot fake messages and scam calls with a live activity.</p></div></div>
+<p class="mu">Also inside: 6 learning modules, 3 calculators, a 10-question quiz, 4 real-life scenarios, a budget dashboard and a feedback form. Use the menu above.</p>
+</section>
+
+<section id="learn" hidden>
+<h2 data-mr="शिकण्याचे मॉड्यूल">Learning modules</h2>
+<p class="mu">Open each module, read it, and answer the short quiz.</p>
+<div class="bar"><div id="pbar"></div></div><p class="mu" id="ptxt"></p>
+<label for="srch">Search topics</label><input id="srch" placeholder="e.g. UPI, loan, savings">
+<div class="grid" id="mods" style="margin-top:12px"></div>
+</section>
+
+<section id="calc" hidden>
+<h2 data-mr="स्मार्ट कॅल्क्युलेटर">Smart calculators</h2>
+<div class="row">
+<div class="card"><h3>A. Savings calculator</h3>
+<label>Monthly income (₹)</label><input type="number" min="0" id="si" value="15000">
+<label>Monthly expenses (₹)</label><input type="number" min="0" id="se" value="11000">
+<label>Monthly savings target (₹)</label><input type="number" min="0" id="st" value="3000">
+<div class="out" id="so"></div></div>
+<div class="card"><h3>B. Monthly budget planner</h3>
+<label>Monthly income (₹)</label><input type="number" min="0" id="bi" value="12000">
+<div class="row" style="gap:0 10px"><div><label>Food</label><input type="number" min="0" class="bx" value="4000"></div><div><label>Education</label><input type="number" min="0" class="bx" value="2000"></div><div><label>Transport</label><input type="number" min="0" class="bx" value="800"></div><div><label>Electricity</label><input type="number" min="0" class="bx" value="700"></div><div><label>Healthcare</label><input type="number" min="0" class="bx" value="800"></div><div><label>Other</label><input type="number" min="0" class="bx" value="700"></div></div>
+<div class="out" id="bo"></div><div class="donut" id="bd"></div><div class="lg" id="bl"></div></div>
+<div class="card"><h3>C. Loan interest calculator</h3>
+<label>Loan amount (₹)</label><input type="number" min="0" id="la" value="50000">
+<label>Annual interest rate (%)</label><input type="number" min="0" step="0.1" id="lr" value="12">
+<label>Duration (years)</label><input type="number" min="1" step="0.5" id="ly" value="2">
+<div class="out" id="lo"></div><p class="mu">Estimate only. Actual bank terms, fees and interest methods may differ. Ask your bank for the official figure.</p></div>
+</div></section>
+
+<section id="bank" hidden>
+<h2 data-mr="बँकिंग जागरूकता">Banking awareness</h2>
+<details open><summary>What is a bank?</summary><p>A bank keeps your money safe, pays interest on savings, gives loans and lets you send or receive money.</p></details>
+<details><summary>What is a savings account, passbook and bank statement?</summary><p>A savings account stores money and pays interest. A passbook is a booklet that records deposits and withdrawals. A bank statement is a detailed list of all transactions for a period.</p></details>
+<details><summary>What are an ATM and a debit card?</summary><p>An ATM is a machine to withdraw cash and check balance. A debit card spends money already in your account; a credit card lets you borrow and repay later with interest.</p></details>
+<details><summary>What is a nominee?</summary><p>The person you name to receive your account money if something happens to you. Always add one.</p></details>
+<details><summary>Bank account vs digital payment app</summary><p>A bank account holds your money. A payment app (like a UPI app) is only a tool that moves money from your bank account to another.</p></details>
+<div class="card k"><h3>How to open a bank account</h3><ol><li>Choose a suitable bank or Post Office near you.</li><li>Check the account’s eligibility rules.</li><li>Ask the bank which documents are needed.</li><li>Fill in and submit the application.</li><li>Complete the bank’s verification.</li><li>Keep your account details, PIN and passbook secure.</li></ol><p class="mu">Requirements vary by bank and account type. Banking services for villages include branches, bank mitras (banking correspondents), post offices, ATMs and mobile banking.</p></div>
+</section>
+
+<section id="schemes" hidden>
+<h2 data-mr="सरकारी योजना">Government financial schemes</h2>
+<p class="mu">Educational summary only. Eligibility, benefits and conditions can change, so always confirm on the official portal.</p>
+<div class="grid" id="sch"></div>
+</section>
+
+<section id="safety" hidden>
+<h2 data-mr="डिजिटल बँकिंग व ऑनलाइन सुरक्षा">Digital banking and online safety</h2>
+<div class="row"><div class="card"><h3>Know the basics</h3><ul>
+<li><b>UPI</b>: instant bank-to-bank payments using a mobile app.</li>
+<li><b>QR payment</b>: scan a shop’s QR code, check the name, enter your PIN to <i>pay</i>.</li>
+<li><b>Phishing</b>: fake messages or calls that trick you into sharing secrets.</li>
+<li><b>Never share</b> your OTP, UPI PIN, ATM PIN or CVV with anyone, including “bank staff”. You never need a PIN to <i>receive</i> money.</li></ul></div>
+<div class="card warn"><h3>Fraud-awareness activity</h3><div id="fraud"></div></div></div>
+<div class="card k"><h3>If you are scammed</h3><p>Call the cyber fraud helpline <b>1930</b> immediately, report at <a href="https://cybercrime.gov.in" target="_blank" rel="noopener">cybercrime.gov.in</a>, and inform your bank to block the account or card.</p></div>
+</section>
+
+<section id="quiz" hidden><h2 data-mr="आर्थिक साक्षरता क्विझ">Financial literacy quiz</h2><div class="card" id="qz"></div></section>
+<section id="scen" hidden><h2 data-mr="खऱ्या आयुष्यातील प्रसंग">Real-life scenarios</h2><div class="card" id="sc"></div></section>
+
+<section id="dash" hidden><h2 data-mr="बजेट डॅशबोर्ड">Budget dashboard</h2>
+<p class="mu">Use sample numbers only. Never enter account numbers, PINs or passwords.</p>
+<div class="row"><div class="card"><label>Monthly income (₹)</label><input type="number" min="0" id="di" value="15000"><label>Monthly expenses (₹)</label><input type="number" min="0" id="de" value="10000">
+<div class="grid" style="margin-top:10px" id="dc"></div></div>
+<div class="card"><div class="donut" id="dd"></div><div class="lg" id="dl"></div><h3>Financial tips</h3><p id="dt"></p></div></div></section>
+
+<section id="feedback" hidden><h2 data-mr="अभिप्राय">Feedback</h2>
+<div class="row"><div class="card"><label for="fn">Name (optional)</label><input id="fn" maxlength="40">
+<label for="fr">Rating</label><select id="fr"><option value="">Choose…</option><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+<label for="fm">Your feedback (at least 10 characters)</label><textarea id="fm" rows="4" maxlength="400"></textarea>
+<button class="btn" id="fs">Send feedback</button><p class="fb" id="fo" aria-live="polite"></p></div>
+<div class="card"><h3>Admin demo panel</h3><p class="mu">Demonstration only: shows data saved in this browser. A real admin needs a backend with secure login.</p><div id="adm"></div><button class="btn alt" id="clr">Clear demo data</button></div></div></section>
+<section id="goal" hidden><h2 data-mr="बचतीचे ध्येय नियोजन">Savings goal planner</h2><p class="mu">Plan for something important: school fees, a bike, a wedding or an emergency fund.</p>
+<div class="row"><div class="card"><label>Goal name</label><input id="gn" value="School fees" maxlength="30"><label>Target amount (₹)</label><input type="number" min="0" id="gt" value="30000"><label>Time to reach it (months)</label><input type="number" min="1" id="gm" value="12"><label>Already saved (₹)</label><input type="number" min="0" id="gs" value="5000"></div><div class="card"><div id="go"></div></div></div></section>
+<section id="fun" hidden><h2 data-mr="मिथक की तथ्य?">Myth or fact?</h2><div class="card" id="mf"></div>
+<h2 data-mr="शब्दकोश">Glossary</h2><input id="gq" placeholder="Search a term: EMI, KYC, OTP…"><div id="gl"></div></section>
+<section id="cert" hidden><h2 data-mr="प्रमाणपत्र">Certificate of financial awareness</h2><div id="cb"></div><button class="btn alt" id="cprev">Preview sample certificate</button></section>
+</main>
+<div id="modal" hidden><div class="card" role="dialog" aria-modal="true"><div id="mc"></div><button class="btn alt" id="mx">Close</button></div></div>
+<footer>MoneySmart Rural · University project · Educational use only, not financial advice.</footer>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+let lang="en";
+const fmt=n=>"₹"+Math.round(n).toLocaleString("en-IN");
+const num=id=>Math.max(0,parseFloat($("#"+id).value)||0);
+const MEM={};const sv=(k,v)=>{MEM[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+const ld=(k,d)=>{try{const v=localStorage.getItem(k);if(v!==null)return JSON.parse(v)}catch(e){}return k in MEM?MEM[k]:d};
+const NAV=[["home","Home","मुख्यपृष्ठ"],["learn","Learn","शिका"],["calc","Calculators","कॅल्क्युलेटर"],["bank","Banking","बँकिंग"],["schemes","Schemes","योजना"],["safety","Online Safety","सुरक्षा"],["quiz","Quiz","क्विझ"],["scen","Scenarios","प्रसंग"],["dash","Dashboard","डॅशबोर्ड"],["goal","Goal Planner","ध्येय नियोजन"],["fun","Games & Glossary","खेळ व शब्दकोश"],["cert","Certificate","प्रमाणपत्र"],["feedback","Feedback","अभिप्राय"]];
+function drawNav(){$("#nav").innerHTML=NAV.map(n=>`<button data-go="${n[0]}">${lang=="mr"?n[2]:n[1]}</button>`).join("")}
+function go(id){if(!$("#"+id))id="home";$$("main section").forEach(s=>s.hidden=s.id!==id);$$("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.go===id));scrollTo(0,0);if(id=="feedback")admin();if(id=="dash")dash();if(id=="cert")cert()}
+document.addEventListener("click",e=>{const g=e.target.closest("[data-go]");if(g)go(g.dataset.go)});
+
+/* generic multiple-choice engine */
+function mcq(el,items,done,after){let i=0,s=0,a=false;
+function draw(){if(i>=items.length){const p=s/items.length;el.innerHTML=`<h3>Your Result: ${s}/${items.length}</h3><p>${p>=.8?"Excellent! You have a good understanding of financial literacy.":p>=.5?"Good effort! Review the learning modules and try again.":"Keep learning. Revisit the modules and retry."}</p><button class="btn" id="rs">Restart</button>`;$("#rs",el)&&0;el.querySelector("#rs").onclick=()=>{i=0;s=0;draw()};done&&done(s,items.length);return}
+const q=items[i];a=false;
+el.innerHTML=`<p class="mu">Question ${i+1} of ${items.length}</p><h3>${q.q}</h3>`+q.o.map((o,k)=>`<button class="opt" data-k="${k}">${"ABCD"[k]}. ${o}</button>`).join("")+`<p class="fb" aria-live="polite"></p><button class="btn" hidden>${i==items.length-1?"See result":"Next question"}</button>`;
+el.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{if(a)return;a=true;const k=+b.dataset.k,ok=k==q.a;if(ok)s++;b.classList.add(ok?"good":"bad");el.querySelectorAll(".opt")[q.a].classList.add("good");const f=el.querySelector(".fb");f.className="fb "+(ok?"good-t":"bad-t");f.textContent=(ok?"✔ Correct! ":"✘ Not quite. ")+q.e;el.querySelector(".btn").hidden=false});
+el.querySelector(".btn").onclick=()=>{i++;draw()}}
+draw()}
+
+/* modules */
+const MODS=[
+["💼","Money Management","पैशांचे व्यवस्थापन","Income is money you earn; expenses are money you spend. A budget plans both so spending stays below income. Rule of thumb: needs first, then savings, then wants.","उत्पन्न म्हणजे तुम्ही कमावलेले पैसे आणि खर्च म्हणजे केलेला खर्च. बजेट म्हणजे खर्च उत्पन्नापेक्षा कमी ठेवण्याची योजना.",{q:"Income ₹10,000, expenses ₹7,500. What is left?",o:["₹1,500","₹2,500","₹3,500","₹17,500"],a:1,e:"10,000 − 7,500 = ₹2,500."}],
+["🐖","Savings","बचत","Saving means keeping part of your income for emergencies, festivals, education and old age. Save first, spend what is left. Even ₹500 a month builds a habit.","बचत म्हणजे उत्पन्नाचा काही भाग आपत्कालीन गरजा, शिक्षण आणि म्हातारपणासाठी बाजूला ठेवणे. आधी बचत करा, मग उरलेले खर्च करा.",{q:"Why should we save money?",o:["To spend everything now","To prepare for future needs","To increase unnecessary expenses","To avoid keeping a budget"],a:1,e:"Savings protect you in emergencies and help reach goals."}],
+["🏦","Banking","बँकिंग","A bank keeps money safe. In a savings account you deposit (put in) and withdraw (take out) money. Example: Ramesh deposits ₹2,000 from his crop sale and withdraws ₹500 at the ATM. His passbook shows ₹1,500 plus interest. A debit card spends your own money; a credit card spends borrowed money.","बँक तुमचे पैसे सुरक्षित ठेवते. बचत खात्यात तुम्ही पैसे जमा करता आणि काढता. डेबिट कार्डने स्वतःचे पैसे खर्च होतात, क्रेडिट कार्डने उसने पैसे.",{q:"A debit card spends…",o:["Bank’s money","Your own account money","A friend’s money","Free money"],a:1,e:"Debit means money is taken straight from your account."}],
+["📈","Loans and Interest","कर्ज आणि व्याज","Interest is the cost of borrowing. Simple interest = Principal × Rate × Time. Borrow only what you can repay, compare lenders, and prefer banks over informal moneylenders with very high rates.","व्याज म्हणजे कर्ज घेण्याची किंमत. साधे व्याज = मुद्दल × दर × कालावधी. परतफेड करू शकाल तेवढेच कर्ज घ्या.",{q:"Simple interest on ₹10,000 at 10% for 2 years?",o:["₹1,000","₹2,000","₹3,000","₹200"],a:1,e:"10,000 × 10% × 2 = ₹2,000."}],
+["📱","Digital Payments","डिजिटल पेमेंट","UPI sends money between bank accounts through a mobile app. Scan a QR code or enter a UPI ID, check the receiver’s name, then enter your PIN to pay. You never enter a PIN to receive money.","UPI मुळे मोबाईल ॲपद्वारे बँक खात्यातून पैसे पाठवता येतात. पैसे घेण्यासाठी PIN कधीही टाकावा लागत नाही.",{q:"When do you enter your UPI PIN?",o:["To receive money","To pay money","To win a prize","To share with support"],a:1,e:"The PIN is only for approving a payment you make."}],
+["🛡️","Financial Safety","आर्थिक सुरक्षा","Banks never ask for your OTP, PIN or CVV. Do not click links in unknown messages. If something feels urgent or too good to be true, stop and call your bank using the number on your card or passbook.","बँक तुमचा OTP, PIN किंवा CVV कधीही विचारत नाही. अनोळखी लिंकवर क्लिक करू नका.",{q:"A caller asks for your OTP “to verify your account”. You should…",o:["Share it quickly","Refuse and hang up","Share half","Send it by SMS"],a:1,e:"Never share an OTP with anyone."}]];
+function mods(){const t=$("#srch").value.toLowerCase(),d=ld("done",[]);
+$("#mods").innerHTML=MODS.map((m,i)=>[m,i]).filter(([m])=>(m[1]+m[3]).toLowerCase().includes(t)).map(([m,i])=>`<div class="card k"><h3>${m[0]} ${i+1}. ${lang=="mr"?m[2]:m[1]}</h3><p class="mu">${d.includes(i)?"✅ Completed":"Not started"}</p><button class="btn" data-m="${i}">Open module</button></div>`).join("")||"<p>No topics found.</p>";
+$("#pbar").style.width=d.length/6*100+"%";$("#ptxt").textContent=`Progress: ${d.length} of 6 modules completed`}
+document.addEventListener("click",e=>{const b=e.target.closest("[data-m]");if(!b)return;const m=MODS[+b.dataset.m];$("#mc").innerHTML=`<h2>${m[0]} ${lang=="mr"?m[2]:m[1]}</h2><p id="mt">${lang=="mr"?m[4]:m[3]}</p><hr><div id="mq"></div>`;$("#modal").hidden=false;
+mcq($("#mq"),[m[5]],()=>{const d=ld("done",[]);if(!d.includes(+b.dataset.m)){d.push(+b.dataset.m);sv("done",d)}mods()})});
+$("#mx").onclick=()=>{$("#modal").hidden=true;speechSynthesis&&speechSynthesis.cancel()};
+$("#srch").oninput=mods;
+
+/* schemes */
+const SCH=[["Pradhan Mantri Jan Dhan Yojana","A national mission for basic bank accounts for everyone.","Generally Indian residents without a bank account.","Financial inclusion.","Basic savings account, RuPay debit card, accident insurance cover and other features.","https://pmjdy.gov.in"],
+["PM Jeevan Jyoti Bima Yojana","A low-cost life insurance scheme.","Generally people with a bank account within the stated age limit.","Support for the family on death.","Life cover for a small yearly premium auto-debited from the account.","https://jansuraksha.gov.in"],
+["PM Suraksha Bima Yojana","A low-cost accident insurance scheme.","Generally account holders within the stated age limit.","Protection against accidents.","Cover for accidental death or disability for a small yearly premium.","https://jansuraksha.gov.in"],
+["Atal Pension Yojana","A pension scheme, mainly for unorganised-sector workers.","Generally bank account holders within the stated age range.","Regular income in old age.","Fixed monthly pension after age 60 based on your contribution.","https://www.npscra.nsdl.co.in"],
+["PM Mudra Yojana","Collateral-free loans for small businesses.","Small and micro business owners and entrepreneurs.","Support for small enterprises and self-employment.","Loan categories for starting or growing small businesses.","https://www.mudra.org.in"]];
+$("#sch").innerHTML=SCH.map(s=>`<div class="card k"><h3>${s[0]}</h3><p><b>What:</b> ${s[1]}</p><p><b>Who may be eligible:</b> ${s[2]}</p><p><b>Purpose:</b> ${s[3]}</p><p><b>Benefits:</b> ${s[4]}</p><p class="mu">Check the official site for application steps and current rules.</p><a class="btn" href="${s[5]}" target="_blank" rel="noopener">Learn more</a></div>`).join("");
+
+/* fraud activity */
+const FR=[["Congratulations! You have won ₹50,000. Click this link immediately and enter your bank details to claim your reward.","Suspicious: an unexpected prize, urgent pressure, a link, and a request for bank details. Genuine lotteries never ask you to pay or share details to “claim”. Delete and report it."],
+["Caller: “I am from your bank. Your account will be blocked. Tell me the OTP just sent to your phone.”","Scam: banks never ask for your OTP, PIN or CVV. Hang up and call the number printed on your passbook or card."]];
+$("#fraud").innerHTML=FR.map((f,i)=>`<div class="sms">${f[0]}</div><button class="btn" data-f="${i}">Is This Safe?</button><button class="btn alt" data-w="${i}">Learn the Warning Signs</button><p class="fb" id="fr${i}" aria-live="polite"></p>`).join("<hr>");
+document.addEventListener("click",e=>{const b=e.target.closest("[data-f],[data-w]");if(!b)return;const i=b.dataset.f??b.dataset.w,o=$("#fr"+i);
+o.className="fb "+(b.dataset.f!==undefined?"bad-t":"");o.textContent=b.dataset.f!==undefined?"❌ Not safe. "+FR[i][1]:"Warning signs: urgency, unknown sender, prizes you never entered, requests for OTP/PIN/bank details, and links or numbers that look unofficial."});
+
+/* quiz + scenarios */
+const QZ=[["Why should we save money?",["To spend everything immediately","To prepare for future needs","To increase unnecessary expenses","To avoid keeping a budget"],1,"Savings prepare you for future needs and emergencies."],
+["A budget is…",["A bank loan","A plan for income and spending","A type of card","A government tax"],1,"A budget plans how income is spent and saved."],
+["Which account is meant for everyday saving?",["Savings account","Loan account","Credit limit","Insurance premium"],0,"A savings account stores money and pays interest."],
+["What is a nominee?",["A bank manager","The person who receives the account money if the holder dies","A loan agent","A shop owner"],1,"Always add a nominee to your account."],
+["Interest on a loan is…",["A gift from the bank","The cost of borrowing money","Your savings","A tax refund"],1,"Interest is what you pay for borrowing."],
+["You may share your UPI PIN with…",["Bank staff","A helpful stranger","Nobody","Family on the phone"],2,"Never share your UPI PIN with anyone."],
+["A message says you won a prize and asks for bank details. This is…",["Safe","Phishing","A bank notice","A government scheme"],1,"Unexpected prizes asking for details are phishing."],
+["PM Suraksha Bima Yojana is mainly…",["Accident insurance","A crop loan","A pension","A savings game"],0,"It offers low-cost accident insurance."],
+["Which fraud helpline number is used in India?",["100","1930","108","1800"],1,"1930 is the national cyber fraud helpline."],
+["What does the loan EMI calculator give?",["An exact bank offer","An estimate","A guaranteed loan","Your credit score"],1,"Results are estimates; actual bank terms may differ."]].map(x=>({q:x[0],o:x[1],a:x[2],e:x[3]}));
+mcq($("#qz"),QZ,(s,n)=>{const b=Math.max(ld("best",0),s);sv("best",b)});
+const SC=[{q:"A household earns ₹12,000. Food ₹4,000, education ₹2,000, electricity and transport ₹1,500, healthcare and other ₹1,500. How much remains?",o:["₹1,000","₹3,000","₹5,000"],a:1,e:"Expenses = 4,000+2,000+1,500+1,500 = ₹9,000. 12,000 − 9,000 = ₹3,000."},
+{q:"You want ₹12,000 for school fees in 2 years. How much should you save each month?",o:["₹250","₹500","₹1,000"],a:1,e:"12,000 ÷ 24 months = ₹500 per month."},
+{q:"Two lenders offer ₹10,000 for 1 year: one at 12% a year, one at 24% a year. Which costs more?",o:["12% lender","24% lender","Same cost"],a:1,e:"Higher interest means a higher total repayment. Always compare rates (₹1,200 vs ₹2,400 simple interest)."},
+{q:"A stranger says: “Scan this QR code to receive your refund.” What do you do?",o:["Scan and enter PIN","Refuse. Scanning and PIN are only for paying","Send them your OTP"],a:1,e:"You never enter a PIN to receive money. This is a scam."}];
+mcq($("#sc"),SC);
+
+/* calculators */
+function donut(d,l,items){const t=items.reduce((a,b)=>a+b[1],0)||1;let p=0;const c=["#1b7a4a","#f0b429","#3b82c4","#c2410c","#7c3aed","#64748b","#16a34a"];
+$(d).style.background="conic-gradient("+items.map((x,i)=>{const s=p;p+=x[1]/t*100;return`${c[i%7]} ${s}% ${p}%`}).join(",")+")";
+$(l).innerHTML=items.map((x,i)=>`<span><i style="background:${c[i%7]}"></i>${x[0]} ${fmt(x[1])}</span>`).join("")}
+function calc(){
+const i=num("si"),e=num("se"),t=num("st"),s=i-e,r=i?s/i*100:0;
+$("#so").innerHTML=`Monthly savings: <b>${fmt(s)}</b><br>Annual savings: <b>${fmt(s*12)}</b><br>Savings rate: <b>${r.toFixed(2)}%</b><br>${s>=t?"✅ You meet your target.":"⚠️ You are "+fmt(t-s)+" short of your target."}`;
+const n=["Food","Education","Transport","Electricity","Healthcare","Other"],v=$$(".bx").map(x=>Math.max(0,+x.value||0)),bi=num("bi"),tot=v.reduce((a,b)=>a+b,0);
+$("#bo").innerHTML=`Total expenses: <b>${fmt(tot)}</b><br>Remaining: <b>${fmt(bi-tot)}</b>${bi-tot<0?"<br>⚠️ Spending exceeds income.":""}`;
+donut("#bd","#bl",n.map((x,k)=>[x,v[k]]).concat([["Remaining",Math.max(0,bi-tot)]]));
+const P=num("la"),R=num("lr")/1200,N=Math.round(num("ly")*12);let m=0;if(P&&N)m=R?P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1):P/N;
+$("#lo").innerHTML=`Monthly EMI: <b>${fmt(m)}</b><br>Total repayment: <b>${fmt(m*N)}</b><br>Total interest: <b>${fmt(m*N-P)}</b>`}
+$$("#calc input").forEach(x=>x.addEventListener("input",calc));
+function dash(){const i=num("di"),e=num("de"),s=i-e,r=i?s/i*100:0;
+$("#dc").innerHTML=[["Monthly income",fmt(i)],["Monthly expenses",fmt(e)],["Monthly savings",fmt(s)],["Savings %",r.toFixed(1)+"%"],["Annual savings",fmt(s*12)]].map(x=>`<div class="out"><span class="mu">${x[0]}</span><br><b>${x[1]}</b></div>`).join("");
+donut("#dd","#dl",[["Expenses",Math.min(e,i)],["Savings",Math.max(0,s)]]);
+$("#dt").textContent=s<0?"You spend more than you earn. List needs and wants and cut wants first.":r<10?"Try to save at least 10% of income. Start small and increase slowly.":r<20?"Good start. Aim for 20% and keep an emergency fund of 3 months’ expenses.":"Great savings rate! Consider a safe long-term option like a recurring deposit."}
+$$("#dash input").forEach(x=>x.addEventListener("input",dash));
+
+/* feedback + admin demo */
+function admin(){const f=ld("fbk",[]);$("#adm").innerHTML=`<p>Best quiz score: <b>${ld("best",0)}/10</b></p><p>Modules completed: <b>${ld("done",[]).length}/6</b></p><p>Feedback received: <b>${f.length}</b></p>`+f.map(x=>`<div class="out">${"★".repeat(+x.r)} ${x.n||"Anonymous"}: ${x.m.replace(/</g,"&lt;")}</div>`).join("")}
+$("#fs").onclick=()=>{const r=$("#fr").value,m=$("#fm").value.trim(),o=$("#fo");
+if(!r||m.length<10){o.className="fb bad-t";o.textContent="Please choose a rating and write at least 10 characters.";return}
+const f=ld("fbk",[]);f.push({n:$("#fn").value.trim(),r,m});sv("fbk",f);o.className="fb good-t";o.textContent="Thank you! Feedback saved in this browser (demo storage).";$("#fm").value="";$("#fr").value="";admin()};
+$("#clr").onclick=()=>{try{localStorage.clear()}catch(e){}admin();mods()};
+
+/* language + speech */
+$("#lang").onclick=()=>{lang=lang=="en"?"mr":"en";$("#lang").textContent=lang=="en"?"मराठी":"English";$$("[data-mr]").forEach(el=>{if(!el.dataset.en)el.dataset.en=el.textContent;el.textContent=lang=="mr"?el.dataset.mr:el.dataset.en});drawNav();const cur=$$("main section").find(s=>!s.hidden).id;go(cur);mods()};
+$("#tts").onclick=()=>{if(!window.speechSynthesis)return alert("Speech is not supported in this browser.");speechSynthesis.cancel();const sec=$$("main section").find(s=>!s.hidden),mt=$("#modal").hidden?null:$("#mt"),u=new SpeechSynthesisUtterance((mt||sec).innerText.slice(0,1500));u.lang=lang=="mr"?"mr-IN":"en-IN";speechSynthesis.speak(u)};
+
+drawNav();calc();dash();mods();go((location.hash||"#home").slice(1));
+function closeIntro(id){$("#intro").hidden=true;go(id||"home")}
+$("#enter").onclick=()=>closeIntro("home");$("#scam").onclick=()=>closeIntro("safety");
+document.addEventListener("keydown",e=>{if(e.key=="Escape"&&!$("#intro").hidden)closeIntro("home")});
+
+/* demo login (hashed password, stored only in this browser) */
+async function hash(s){try{const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode("ms:"+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}catch(e){return encodeURIComponent(s)}}
+const who=()=>ld("me",null),esc=s=>String(s).replace(/</g,"&lt;");
+function accBtn(){const u=who();$("#acc").textContent=u?"👤 "+u.n+" (Logout)":"👤 Login"}
+$("#acc").onclick=()=>{if(who()){sv("me",null);accBtn();return}
+$("#mc").innerHTML=`<h2>Login or create account</h2><p class="mu">Demo account saved only in this browser. Do not use a real password.</p><label>Name</label><input id="un" maxlength="30"><label>Password (min 4 characters)</label><input id="up" type="password"><button class="btn" id="lg">Login</button><button class="btn alt" id="rg">Create account</button><button class="btn alt" id="gu">Continue as guest</button><p class="fb" id="lm" aria-live="polite"></p>`;$("#modal").hidden=false;
+const msg=t=>{$("#lm").className="fb bad-t";$("#lm").textContent=t};
+async function auth(reg){const n=$("#un").value.trim(),p=$("#up").value;if(n.length<2||p.length<4)return msg("Enter a name (2+ letters) and a password (4+ characters).");const a=ld("accs",{}),k=n.toLowerCase(),h=await hash(p);
+if(reg){if(a[k])return msg("This name already exists. Please login.");a[k]={n,h};sv("accs",a)}else if(!a[k])return msg("No account found with this name. Click Create account first.");else if(a[k].h!==h)return msg("Wrong password. Please try again.");
+sv("me",{n:a[k].n});accBtn();$("#modal").hidden=true}
+$("#lg").onclick=()=>auth(false);$("#rg").onclick=()=>auth(true);$("#gu").onclick=()=>{sv("me",{n:"Guest"});accBtn();$("#modal").hidden=true}};
+accBtn();
+
+/* goal planner */
+function goal(){const t=num("gt"),m=Math.max(1,num("gm")),s=num("gs"),need=Math.max(0,t-s),p=t?Math.min(100,s/t*100):0;
+$("#go").innerHTML=`<h3>${esc($("#gn").value||"My goal")}</h3>Save per month: <b>${fmt(need/m)}</b><br>Save per week: <b>${fmt(need/m/4.33)}</b><br>Still needed: <b>${fmt(need)}</b><div class="bar" style="margin:10px 0"><div style="width:${p}%"></div></div><p class="mu">${p.toFixed(0)}% of your goal is already saved. ${need==0?"🎉 Goal reached!":"Tip: set up an automatic monthly transfer on salary day."}</p>`}
+$$("#goal input").forEach(x=>x.addEventListener("input",goal));goal();
+
+/* myth or fact + glossary */
+mcq($("#mf"),[["Banks can ask for your OTP over the phone.",1,"Myth. Banks never ask for your OTP."],["You need to enter a UPI PIN to receive money.",1,"Myth. The PIN is only for paying."],["A nominee receives your account money if you pass away.",0,"Fact. Always add a nominee."],["A higher interest rate on a loan means you repay more.",0,"Fact. Compare rates before borrowing."],["Prize messages from unknown numbers are usually genuine.",1,"Myth. They are usually phishing."],["Saving a small amount every month can add up.",0,"Fact. ₹500 a month is ₹6,000 a year."]].map(x=>({q:x[0],o:["Fact","Myth"],a:x[1]==0?0:1,e:x[2]})));
+const GL=[["EMI","Fixed monthly loan payment","कर्जाचा दरमहा ठरलेला हप्ता"],["KYC","Identity check done by the bank","बँकेकडून ओळख पडताळणी"],["OTP","One-time code. Never share it","एकदाच वापरायचा कोड, कोणालाही सांगू नका"],["Nominee","Person who receives your account money","खात्यातील पैसे मिळणारी व्यक्ती"],["Interest","Cost of borrowing or reward for saving","कर्जाची किंमत किंवा बचतीवरील परतावा"],["Principal","The original loan or deposit amount","मूळ रक्कम (मुद्दल)"],["Deposit","Putting money into your account","खात्यात पैसे जमा करणे"],["Withdrawal","Taking money out of your account","खात्यातून पैसे काढणे"],["Premium","Amount paid for insurance","विम्यासाठी भरायची रक्कम"],["UPI","Instant mobile payments between banks","मोबाईलद्वारे तात्काळ बँक पेमेंट"],["Passbook","Booklet recording your transactions","व्यवहारांची नोंद असलेले पुस्तक"],["Phishing","Fake message to steal your details","माहिती चोरण्यासाठी पाठवलेला खोटा संदेश"],["Credit score","Number showing your repayment history","परतफेडीच्या इतिहासाचा गुण"]];
+function gl(){const q=$("#gq").value.toLowerCase();$("#gl").innerHTML=GL.filter(g=>g.join(" ").toLowerCase().includes(q)).map(g=>`<div class="card" style="margin:8px 0"><b>${g[0]}</b>: ${g[1]}<br><span class="mu">${g[2]}</span></div>`).join("")||"<p>No term found.</p>"}
+$("#gq").oninput=gl;gl();
+
+/* certificate */
+function cert(p){const d=ld("done",[]).length,b=ld("best",0),u=who(),ok=p===true||(d==6&&b>=7);
+$("#cb").innerHTML=ok?`<div class="cert"><p>Certificate of Financial Awareness</p><h2>${u?esc(u.n):"Your Name"}</h2><p>has completed the learning modules of <b>MoneySmart Rural</b> and scored <b>${p===true?"10":b}/10</b> in the Financial Literacy Quiz.</p><p class="mu">${new Date().toLocaleDateString("en-IN")}${u?"":" · Login to add your name"}</p>${p===true?"<p class='mu'>Sample preview</p>":""}</div>`:`<div class="card"><p>🔒 Locked. Complete all 6 modules (${d}/6 done) and score at least 7/10 in the quiz (best: ${b}/10).</p><button class="btn" data-go="learn">Go to modules</button><button class="btn alt" data-go="quiz">Go to quiz</button></div>`}
+$("#cprev").onclick=()=>cert(true);
+
+/* guided demo tour */
+let ti=-1;const TOUR=[["calc","Change the loan amount or rate and watch the EMI update."],["safety","Click “Is This Safe?” on the fake prize message."],["quiz","Answer a question to see instant feedback and scoring."],["dash","Change income and expenses and the chart updates."],["goal","Plan a savings goal and see the monthly amount."],["cert","Finish modules and the quiz to unlock the certificate."]];
+function tour(){ti++;let b=$("#tb");if(!b){b=document.createElement("div");b.id="tb";b.className="tourbar";document.body.appendChild(b)}
+if(ti>=TOUR.length){b.remove();ti=-1;go("home");return}
+go(TOUR[ti][0]);b.innerHTML=`<b>Step ${ti+1}/${TOUR.length}:</b> ${TOUR[ti][1]} <button class="btn" id="tn">${ti==TOUR.length-1?"Finish":"Next"}</button><button class="btn alt" id="tq">Exit</button>`;$("#tn").onclick=tour;$("#tq").onclick=()=>{b.remove();ti=-1}}
+const st=()=>{ti=-1;$("#intro").hidden=true;tour()};$("#tour").onclick=st;$("#tour2").onclick=st;
+</script></body></html>
